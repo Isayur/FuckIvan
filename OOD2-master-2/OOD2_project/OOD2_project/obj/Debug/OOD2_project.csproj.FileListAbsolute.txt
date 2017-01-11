@@ -1,9 +1,0 @@
-\\psf\Home\Downloads\OOD2-master-2\OOD2_project\OOD2_project\bin\Debug\OOD2_project.exe.config
-\\psf\Home\Downloads\OOD2-master-2\OOD2_project\OOD2_project\bin\Debug\OOD2_project.exe
-\\psf\Home\Downloads\OOD2-master-2\OOD2_project\OOD2_project\bin\Debug\OOD2_project.pdb
-\\psf\Home\Downloads\OOD2-master-2\OOD2_project\OOD2_project\obj\Debug\OOD2_project.csprojResolveAssemblyReference.cache
-\\psf\Home\Downloads\OOD2-master-2\OOD2_project\OOD2_project\obj\Debug\OOD2_project.Form1.resources
-\\psf\Home\Downloads\OOD2-master-2\OOD2_project\OOD2_project\obj\Debug\OOD2_project.Properties.Resources.resources
-\\psf\Home\Downloads\OOD2-master-2\OOD2_project\OOD2_project\obj\Debug\OOD2_project.csproj.GenerateResource.Cache
-\\psf\Home\Downloads\OOD2-master-2\OOD2_project\OOD2_project\obj\Debug\OOD2_project.exe
-\\psf\Home\Downloads\OOD2-master-2\OOD2_project\OOD2_project\obj\Debug\OOD2_project.pdb
