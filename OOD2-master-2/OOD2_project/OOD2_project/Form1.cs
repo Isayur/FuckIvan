@@ -36,6 +36,8 @@ namespace OOD2_project
             this.network = new Network(workPanel.Height, workPanel.Width);
             this.tbCurrentFlow.Text = "0";
             this.tbMaxFlow.Text = "0";
+            numericUpDown1.Visible = false;
+            label9.Visible = false;
         }
 
         private void workPanel_MouseDown(object sender, MouseEventArgs e)
@@ -53,7 +55,7 @@ namespace OOD2_project
                 switch (selectedComponent)
                 {
                     case "pump":   // CUrrent flow added...
-                        if (tbCurrentFlow.Text == "" && tbMaxFlow.Text == "")
+                        if (tbCurrentFlow.Text == "0" && tbMaxFlow.Text == "0")
                         {
                             MessageBox.Show("Please enter the current and max flow");
                         }
@@ -74,9 +76,10 @@ namespace OOD2_project
                         }
                         break;
                     case "adjSpliter":
-                        trackBar1.Visible = true;
+                        numericUpDown1.Visible = true;
+                        label9.Visible = true;
                         btSet.Visible = true;
-                        lbPrc.Visible = true;
+
                         if (!this.network.checkOverlap(point))
                         {
                             this.adjSpliter = new Adjustable_Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point);
@@ -85,6 +88,12 @@ namespace OOD2_project
                         }
                         else
                             MessageBox.Show("Components cannot overlap!");
+
+                        if (numericUpDown1.Visible)
+                        {
+                            workPanel.Enabled = false;
+                            MessageBox.Show("Specify percentage for the Adjustable Splitter in the bottom left corner.");
+                        }
                         break;
                     case "spliter":
                         if (!this.network.checkOverlap(point))
@@ -139,7 +148,20 @@ namespace OOD2_project
             }
             this.network.panelHeight = Convert.ToInt32(this.workPanel.Size.Height);
             this.network.panelWidth = Convert.ToInt32(this.workPanel.Size.Width);
+          
+            foreach (Component com in this.network.listComponents)
+            {
+                // foreach loop to draw
+                if (com is Pump)
+                    com.DrawComponent(gr);
+                else
+                    com.DrawComponent(gr);
+            }
+            foreach (Connection c in this.network.listConnections)
+            {
 
+                c.DrawConnection(gr);
+            }
         }
         private void pbPump_MouseDown(object sender, MouseEventArgs e)
         {
@@ -241,8 +263,7 @@ namespace OOD2_project
             selectedImage = null;
             pbAdjustableSpliter.BorderStyle = BorderStyle.None;
             point = new Point(e.X, e.Y);
-            //trackBar1.Visible = true;
-            
+             
         }
 
         private void pbSpliter_MouseUp(object sender, MouseEventArgs e)
@@ -284,14 +305,17 @@ namespace OOD2_project
                 if (this.network.listComponents.Count >= 1 && this.network.getComponent(p) != null)
                 {
                     
-                         MenuItem[] menuItems = new MenuItem[2];
+                         MenuItem[] menuItems = new MenuItem[3];
                         menuItems[0] = new MenuItem("Remove Connection(s)");
                         menuItems[1] = new MenuItem("Remove Component");
+                        menuItems[2] = new MenuItem("Clear Settings");
+
                         ContextMenu buttonMenu = new ContextMenu(menuItems);
                         buttonMenu.Show(workPanel, new System.Drawing.Point(p.X, p.Y));
                         menuItems[0].Click += new EventHandler((obj, evargs) => menuItem_click(obj, evargs, p, menuItems));
                         menuItems[1].Click += new EventHandler((obj, evargs) => menuItem_click(obj, evargs, p, menuItems));
-             
+                        menuItems[2].Click += new EventHandler((obj, evargs) => menuItem_click(obj, evargs, p, menuItems));
+
                   }
             }
           
@@ -302,17 +326,30 @@ namespace OOD2_project
             //MenuItem Delete Connection from the list with connections
             if (sender == menuItems[0])
             {
-              
+                this.network.RemoveConnection( this.network.getComponent(point));
+                this.network.ClearSettings(this.network.getComponent(point));
+
+                //foreach (var connection in this.network.getComponent(point).getConnections())
+                //{
+                //  //  this.network.RemoveConnection(connection, this.network.getComponent(point));
+                //    workPanel.Invalidate();
+                //     workPanel.Refresh();
+
+                //}
             }
             //MenuItem Delete Component form the list with components
             if (sender == menuItems[1])
             {
-                //MUST BE FIXED !!!!!
-              this.network.RemoveComponent(this.network.getComponent(point));
+               this.network.RemoveComponent(this.network.getComponent(point));
                
-               // isSelected = false;
-               // this.network.getComponent(point).RemoveConnection(this.network.getConnection();
+                
             }
+            //clears settings for the selected item so it can be reused
+            if (sender == menuItems[2])
+            {
+                 this.network.ClearSettings(this.network.getComponent(point));
+             }
+           // workPanel.Refresh();
             workPanel.Invalidate();
         }
 
@@ -359,10 +396,12 @@ namespace OOD2_project
 
         private void btSet_Click(object sender, EventArgs e)
         {
-            trackBar1.Visible = false;
+            numericUpDown1.Visible = false;
+            label9.Visible = false;
+
             btSet.Visible = false;
-            lbPrc.Visible = false;
-            adjSpliter.setPercentage(trackBar1.Value);
+             adjSpliter.setPercentage(Convert.ToDouble(numericUpDown1.Value));
+             workPanel.Enabled = true;
              
         }
 
@@ -487,6 +526,12 @@ namespace OOD2_project
             {
                 this.Close();
             }
+        }
+        
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
+            
         }
 
     }

@@ -20,7 +20,7 @@ namespace OOD2_project
         public int panelHeight;
         public List<Component> listComponents;
         public List<Connection> listConnections;
-       // private int maxFlow;
+        // private int maxFlow;
         public Component component;
         public Connection connection;
         private string savedFile;
@@ -47,7 +47,7 @@ namespace OOD2_project
             try
             {
                 Rectangle rect = new Rectangle(position.X - 1, position.Y - 1, component.size, component.size);
-                gr.DrawImage(component.image, rect);   
+                gr.DrawImage(component.image, rect);
             }
             catch (Exception ex)
             {
@@ -68,7 +68,7 @@ namespace OOD2_project
                 if (comp.rect.IntersectsWith(r2))
                 {
                     return true;
-                    
+
                 }
             }
             return false;
@@ -112,7 +112,7 @@ namespace OOD2_project
         /// <param name="con"></param>
         public void AddConnection(ref Connection con)
         {
-            
+
 
             if (con.startComponent is Pump)
             {
@@ -127,7 +127,7 @@ namespace OOD2_project
                         {
                             listComponents[i] = p;
                             con.startComponent = p;
-                           // this.listConnections.Add(con);
+                            // this.listConnections.Add(con);
                         }
 
                         break;
@@ -166,7 +166,7 @@ namespace OOD2_project
                         break;
                     }
                 }
-            } 
+            }
             else if (con.startComponent is Adjustable_Spliter)
             {
 
@@ -199,7 +199,7 @@ namespace OOD2_project
                         break;
                     }
                 }
-            } 
+            }
             else if (con.startComponent is Merger)
             {
 
@@ -213,7 +213,7 @@ namespace OOD2_project
                         {
                             listComponents[i] = m;
                             con.startComponent = m;
-                           // this.listConnections.Add(con);
+                            // this.listConnections.Add(con);
                         }
                         break;
                     }
@@ -331,7 +331,7 @@ namespace OOD2_project
                                     this.listConnections.Add(con);
                                 }
                             }
-                            
+
                             break;
                         }
                     }
@@ -379,7 +379,7 @@ namespace OOD2_project
                 }
 
             }
-            
+
         }
 
 
@@ -471,17 +471,100 @@ namespace OOD2_project
             {
                 listConnections.Remove(c1);
             }
-                   // this.RemoveConnection();
-                    this.listComponents.Remove(comp);
-        }
+            // this.RemoveConnection();
+            this.listComponents.Remove(comp);
+         }
 
         /// <summary>
         /// Remove connection from the connections list
         /// </summary>
         /// <param name="con"></param>
-        public void RemoveConnection(Connection con)
+        public void RemoveConnection( Component comp)
         {
-            this.listConnections.Remove(con);
+            // this.listConnections.Remove(con);
+            List<Connection> toRemove = new List<Connection>();
+            foreach (Connection x in listConnections)
+            {
+                if (x.startComponent == comp)
+                {
+                    int counter = 0;
+                    foreach (Component y in listComponents)
+                    {
+                        if (y == x.endComponent)
+                        {
+                            if (y is Pump)
+                            {
+                                Pump s = y as Pump;
+                                s.Clear();
+                                // listComponents[counter] = s;
+                            }
+                            else if (y is Spliter)
+                            {
+                                Spliter s = y as Spliter;
+                                s.Clear(x);
+                                //  listComponents[counter] = s;
+                            }
+                            else if (y is Adjustable_Spliter)
+                            {
+                                Adjustable_Spliter s = y as Adjustable_Spliter;
+                                s.Clear(x);
+                                //  listComponents[counter] = s;
+                            }
+                            else if (y is Merger)
+                            {
+                                Merger s = y as Merger;
+                                s.Clear(x);
+                                //  listComponents[counter] = s;
+                            }
+
+                        }
+                        counter++;
+                    }
+                    toRemove.Add(x);
+                }
+                if (x.endComponent == comp)
+                {
+                    int counter = 0;
+                    foreach (Component y in listComponents)
+                    {
+                        if (y == x.startComponent)
+                        {
+                            if (y is Sink)
+                            {
+                                Sink s = y as Sink;
+                                s.Clear();
+                                //  listComponents[counter] = s;
+                            }
+                            else if (y is Spliter)
+                            {
+                                Spliter s = y as Spliter;
+                                s.Clear(x);
+                                //  listComponents[counter] = s;
+                            }
+                            else if (y is Adjustable_Spliter)
+                            {
+                                Adjustable_Spliter s = y as Adjustable_Spliter;
+                                s.Clear(x);
+                                //listComponents[counter] = s;
+                            }
+                            else if (y is Merger)
+                            {
+                                Merger s = y as Merger;
+                                s.Clear(x);
+                                //listComponents[counter] = s;
+                            }
+
+                        }
+                    }
+                    toRemove.Add(x);
+                }
+            }
+
+            foreach (Connection c1 in toRemove)
+            {
+                listConnections.Remove(c1);
+            }
+
         }
 
         /// <summary>
@@ -514,9 +597,55 @@ namespace OOD2_project
 
         }
 
-     
+
+
+
+        internal void ClearSettings(Component comp)
+        {
+            if (comp is Pump)
+            {
+                Pump p = comp as Pump;
+                 p.Clear();
+            }
+            else if (comp is Merger)
+            {
+                foreach (Connection x in listConnections)
+                {
+                    Merger m = comp as Merger;
+                    m.Clear(x);
+                    m.Clear();
+                }
+            }
+            else if (comp is Adjustable_Spliter)
+            {
+                foreach (Connection x in listConnections)
+                {
+                    Adjustable_Spliter s = comp as Adjustable_Spliter;
+                    s.Clear(x);
+                    s.Clear();
+
+                }
+            }
+            else if (comp is Spliter)
+            {
+                foreach (Connection x in listConnections)
+                {
+                    Spliter s = comp as Spliter;
+                    s.Clear(x);
+                    s.Clear();
+
+                }
+            }
+            else if (comp is Sink)
+            {
+                Sink s = comp as Sink;
+                s.Clear();
+               
+            }
+                     
+            }
+        }
+
 
     }
-    
-    
-}
+

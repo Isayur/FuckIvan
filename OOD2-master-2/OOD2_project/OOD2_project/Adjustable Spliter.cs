@@ -11,10 +11,10 @@ namespace OOD2_project
     [Serializable]
     public class Adjustable_Spliter : Component
     {
-        private int percentage;
-        private int inFlow;
-        public int upOutFlow;
-        public int lowOutFlow;
+        private double percentage;
+        private double inFlow;
+        public double upOutFlow;
+        public double lowOutFlow;
         private Connection Input;
         public Connection UpOutput;
         public Connection LowOutput;
@@ -39,7 +39,7 @@ namespace OOD2_project
             //this.currentFlow = CurrentFlow;
         }
 
-        public void setPercentage(int value)
+        public void setPercentage(double value)
         {
             percentage = value;
         }
@@ -71,6 +71,22 @@ namespace OOD2_project
                 counterUpOut = false;
                 LowOutput = null;
             }
+        }
+
+        public void Clear()
+        {
+           
+                counterIn = false;
+                inFlow = 0;
+                upOutFlow = 0;
+                lowOutFlow = 0;
+                Input = null;
+             
+                counterLowOut = false;
+                LowOutput = null;
+             
+                counterUpOut = false;
+              
         }
 
         public void setInput(ref Connection conn)

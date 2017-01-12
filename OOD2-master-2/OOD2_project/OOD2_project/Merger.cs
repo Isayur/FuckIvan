@@ -14,9 +14,9 @@ namespace OOD2_project
         public Connection upInput { get; set; }
         public Connection lowInput { get; set; }
         public Connection Output { get; set; }
-        private int lowInflow;
-        private int upInflow;
-        public int outFlow;
+        private double lowInflow;
+        private double upInflow;
+        public double outFlow;
         public bool counterLowIn = false;
         public bool counterUpIn = false;
         public bool counterOut = false;
@@ -60,6 +60,24 @@ namespace OOD2_project
                 outFlow = lowInflow;
                 lowInput = null;
             }
+        }
+
+        public void Clear()
+        {
+             
+             
+                counterOut = false;
+                Output = null;
+             
+                counterLowIn = false;
+                lowInflow = 0;
+                outFlow = upInflow;
+                lowInput = null;
+            
+                counterUpIn = false;
+                upInflow = 0;
+                outFlow = lowInflow;
+              
         }
 
         public void DrawComponent(Graphics gr, Point p)

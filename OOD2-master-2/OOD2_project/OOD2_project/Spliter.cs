@@ -11,9 +11,9 @@ namespace OOD2_project
     [Serializable]
     public class Spliter : Component
     {
-        public int upOutFlow;
-        public int lowOutFlow;
-        public int inFlow;
+        public double upOutFlow;
+        public double lowOutFlow;
+        public double inFlow;
         private Connection Input;
         public Connection UpOutput;
         public Connection LowOutput;
@@ -68,6 +68,21 @@ namespace OOD2_project
                 counterUpOut = false;
                 LowOutput = null;
             }
+        }
+        public void Clear()
+        {
+             
+                counterIn = false;
+                inFlow = 0;
+                upOutFlow = 0;
+                lowOutFlow = 0;
+                Input = null;
+            
+                counterLowOut = false;
+                LowOutput = null;
+             
+                counterUpOut = false;
+              
         }
 
         public void setInput( ref Connection conn)

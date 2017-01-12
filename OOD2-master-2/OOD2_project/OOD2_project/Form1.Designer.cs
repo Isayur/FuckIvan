@@ -28,11 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.workPanel = new System.Windows.Forms.Panel();
             this.btSet = new System.Windows.Forms.Button();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.toolBox = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.pbPump = new System.Windows.Forms.PictureBox();
             this.pbSink = new System.Windows.Forms.PictureBox();
             this.pbAdjustableSpliter = new System.Windows.Forms.PictureBox();
@@ -51,11 +57,8 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lbPrc = new System.Windows.Forms.Label();
-            this.lbCompPrc = new System.Windows.Forms.Label();
-            this.workPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.toolBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPump)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSink)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAdjustableSpliter)).BeginInit();
@@ -68,13 +71,9 @@
             // workPanel
             // 
             this.workPanel.BackColor = System.Drawing.Color.White;
-            this.workPanel.Controls.Add(this.lbCompPrc);
-            this.workPanel.Controls.Add(this.lbPrc);
-            this.workPanel.Controls.Add(this.btSet);
-            this.workPanel.Controls.Add(this.trackBar1);
             this.workPanel.Location = new System.Drawing.Point(164, 29);
             this.workPanel.Name = "workPanel";
-            this.workPanel.Size = new System.Drawing.Size(815, 488);
+            this.workPanel.Size = new System.Drawing.Size(815, 588);
             this.workPanel.TabIndex = 0;
             this.workPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.workPanel_DragDrop);
             this.workPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.workPanel_DragEnter);
@@ -84,7 +83,7 @@
             // 
             // btSet
             // 
-            this.btSet.Location = new System.Drawing.Point(18, 438);
+            this.btSet.Location = new System.Drawing.Point(35, 549);
             this.btSet.Name = "btSet";
             this.btSet.Size = new System.Drawing.Size(93, 23);
             this.btSet.TabIndex = 1;
@@ -93,22 +92,18 @@
             this.btSet.Visible = false;
             this.btSet.Click += new System.EventHandler(this.btSet_Click);
             // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(32, 237);
-            this.trackBar1.Maximum = 100;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar1.Size = new System.Drawing.Size(45, 198);
-            this.trackBar1.SmallChange = 10;
-            this.trackBar1.TabIndex = 0;
-            this.trackBar1.TickFrequency = 10;
-            this.trackBar1.Value = 50;
-            this.trackBar1.Visible = false;
-            // 
             // toolBox
             // 
-            this.toolBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.toolBox.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.toolBox.Controls.Add(this.label9);
+            this.toolBox.Controls.Add(this.numericUpDown1);
+            this.toolBox.Controls.Add(this.label8);
+            this.toolBox.Controls.Add(this.btSet);
+            this.toolBox.Controls.Add(this.label7);
+            this.toolBox.Controls.Add(this.label6);
+            this.toolBox.Controls.Add(this.label5);
+            this.toolBox.Controls.Add(this.label4);
+            this.toolBox.Controls.Add(this.label3);
             this.toolBox.Controls.Add(this.pbPump);
             this.toolBox.Controls.Add(this.pbSink);
             this.toolBox.Controls.Add(this.pbAdjustableSpliter);
@@ -121,14 +116,84 @@
             this.toolBox.Controls.Add(this.tbCurrentFlow);
             this.toolBox.Location = new System.Drawing.Point(0, 27);
             this.toolBox.Name = "toolBox";
-            this.toolBox.Size = new System.Drawing.Size(158, 490);
+            this.toolBox.Size = new System.Drawing.Size(158, 603);
             this.toolBox.TabIndex = 1;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(32, 507);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(91, 13);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "Adjustable Splitter";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(23, 523);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 3;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(84, 363);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(28, 13);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Pipe";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(86, 239);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(39, 13);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Splitter";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(86, 301);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(40, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Merger";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(84, 166);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 26);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Adjustable \r\nSplitter";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(86, 110);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(28, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Sink";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(84, 35);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(34, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Pump";
             // 
             // pbPump
             // 
             this.pbPump.ErrorImage = null;
-            this.pbPump.Image = ((System.Drawing.Image)(resources.GetObject("pbPump.Image")));
-            this.pbPump.Location = new System.Drawing.Point(39, 17);
+            this.pbPump.Image = global::OOD2_project.Properties.Resources.pump;
+            this.pbPump.Location = new System.Drawing.Point(23, 24);
             this.pbPump.Name = "pbPump";
             this.pbPump.Size = new System.Drawing.Size(55, 38);
             this.pbPump.TabIndex = 0;
@@ -138,8 +203,8 @@
             // 
             // pbSink
             // 
-            this.pbSink.Image = ((System.Drawing.Image)(resources.GetObject("pbSink.Image")));
-            this.pbSink.Location = new System.Drawing.Point(39, 83);
+            this.pbSink.Image = global::OOD2_project.Properties.Resources.sink;
+            this.pbSink.Location = new System.Drawing.Point(23, 90);
             this.pbSink.Name = "pbSink";
             this.pbSink.Size = new System.Drawing.Size(58, 43);
             this.pbSink.TabIndex = 1;
@@ -149,10 +214,11 @@
             // 
             // pbAdjustableSpliter
             // 
-            this.pbAdjustableSpliter.Image = ((System.Drawing.Image)(resources.GetObject("pbAdjustableSpliter.Image")));
-            this.pbAdjustableSpliter.Location = new System.Drawing.Point(39, 150);
+            this.pbAdjustableSpliter.ErrorImage = null;
+            this.pbAdjustableSpliter.Image = global::OOD2_project.Properties.Resources.adjustable_spliter;
+            this.pbAdjustableSpliter.Location = new System.Drawing.Point(23, 157);
             this.pbAdjustableSpliter.Name = "pbAdjustableSpliter";
-            this.pbAdjustableSpliter.Size = new System.Drawing.Size(55, 41);
+            this.pbAdjustableSpliter.Size = new System.Drawing.Size(55, 46);
             this.pbAdjustableSpliter.TabIndex = 2;
             this.pbAdjustableSpliter.TabStop = false;
             this.pbAdjustableSpliter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbAdjustableSpliter_MouseDown);
@@ -160,10 +226,10 @@
             // 
             // pbSpliter
             // 
-            this.pbSpliter.Image = ((System.Drawing.Image)(resources.GetObject("pbSpliter.Image")));
-            this.pbSpliter.Location = new System.Drawing.Point(39, 216);
+            this.pbSpliter.Image = global::OOD2_project.Properties.Resources.spliter;
+            this.pbSpliter.Location = new System.Drawing.Point(23, 223);
             this.pbSpliter.Name = "pbSpliter";
-            this.pbSpliter.Size = new System.Drawing.Size(58, 39);
+            this.pbSpliter.Size = new System.Drawing.Size(55, 45);
             this.pbSpliter.TabIndex = 3;
             this.pbSpliter.TabStop = false;
             this.pbSpliter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbSpliter_MouseDown);
@@ -171,10 +237,10 @@
             // 
             // pbMerger
             // 
-            this.pbMerger.Image = ((System.Drawing.Image)(resources.GetObject("pbMerger.Image")));
-            this.pbMerger.Location = new System.Drawing.Point(39, 278);
+            this.pbMerger.Image = global::OOD2_project.Properties.Resources.merger;
+            this.pbMerger.Location = new System.Drawing.Point(23, 285);
             this.pbMerger.Name = "pbMerger";
-            this.pbMerger.Size = new System.Drawing.Size(55, 40);
+            this.pbMerger.Size = new System.Drawing.Size(55, 44);
             this.pbMerger.TabIndex = 4;
             this.pbMerger.TabStop = false;
             this.pbMerger.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbMerger_MouseDown);
@@ -182,8 +248,8 @@
             // 
             // pbPipe
             // 
-            this.pbPipe.Image = ((System.Drawing.Image)(resources.GetObject("pbPipe.Image")));
-            this.pbPipe.Location = new System.Drawing.Point(39, 340);
+            this.pbPipe.Image = global::OOD2_project.Properties.Resources.pipe;
+            this.pbPipe.Location = new System.Drawing.Point(23, 347);
             this.pbPipe.Name = "pbPipe";
             this.pbPipe.Size = new System.Drawing.Size(55, 42);
             this.pbPipe.TabIndex = 5;
@@ -196,7 +262,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 450);
+            this.label2.Location = new System.Drawing.Point(17, 450);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 13);
             this.label2.TabIndex = 3;
@@ -205,7 +271,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 424);
+            this.label1.Location = new System.Drawing.Point(12, 428);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 13);
             this.label1.TabIndex = 2;
@@ -232,7 +298,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(979, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(990, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -251,34 +317,34 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click_1);
             // 
             // OpenToolStripMenuItem
             // 
             this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
-            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.OpenToolStripMenuItem.Text = "Open";
             this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem1
             // 
             this.saveAsToolStripMenuItem1.Name = "saveAsToolStripMenuItem1";
-            this.saveAsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
             this.saveAsToolStripMenuItem1.Text = "Save As";
             this.saveAsToolStripMenuItem1.Click += new System.EventHandler(this.saveAsToolStripMenuItem1_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.ExitToolStripMenuItem.Text = "Exit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -288,32 +354,11 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // lbPrc
-            // 
-            this.lbPrc.AutoSize = true;
-            this.lbPrc.Font = new System.Drawing.Font("Papyrus", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPrc.Location = new System.Drawing.Point(70, 237);
-            this.lbPrc.Name = "lbPrc";
-            this.lbPrc.Size = new System.Drawing.Size(26, 198);
-            this.lbPrc.TabIndex = 2;
-            this.lbPrc.Text = "100\r\n90\r\n80\r\n70\r\n60\r\n50\r\n40\r\n30\r\n20\r\n10\r\n0";
-            this.lbPrc.Visible = false;
-            // 
-            // lbCompPrc
-            // 
-            this.lbCompPrc.AutoSize = true;
-            this.lbCompPrc.Location = new System.Drawing.Point(60, 24);
-            this.lbCompPrc.Name = "lbCompPrc";
-            this.lbCompPrc.Size = new System.Drawing.Size(35, 13);
-            this.lbCompPrc.TabIndex = 3;
-            this.lbCompPrc.Text = "label3";
-            this.lbCompPrc.Visible = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(979, 529);
+            this.ClientSize = new System.Drawing.Size(990, 629);
             this.Controls.Add(this.toolBox);
             this.Controls.Add(this.workPanel);
             this.Controls.Add(this.menuStrip1);
@@ -321,11 +366,9 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.workPanel.ResumeLayout(false);
-            this.workPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.toolBox.ResumeLayout(false);
             this.toolBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPump)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSink)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAdjustableSpliter)).EndInit();
@@ -361,10 +404,15 @@
         private System.Windows.Forms.PictureBox pbSpliter;
         private System.Windows.Forms.PictureBox pbMerger;
         private System.Windows.Forms.PictureBox pbPipe;
-        private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button btSet;
-        private System.Windows.Forms.Label lbPrc;
-        private System.Windows.Forms.Label lbCompPrc;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label9;
     }
 }
 

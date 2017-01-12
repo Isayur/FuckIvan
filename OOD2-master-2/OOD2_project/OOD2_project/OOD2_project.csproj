@@ -70,6 +70,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
@@ -86,23 +87,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\adjustable_spliter.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\merger.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pipe.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pump.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\sink.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\spliter.png" />
+    <Content Include="Resources\adjustable_spliter.png" />
+    <Content Include="Resources\merger.png" />
+    <Content Include="Resources\pipe.png" />
+    <Content Include="Resources\pump.png" />
+    <Content Include="Resources\sink.png" />
+    <Content Include="Resources\spliter.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
