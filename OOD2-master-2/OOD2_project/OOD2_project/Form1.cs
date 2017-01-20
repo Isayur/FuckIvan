@@ -24,7 +24,7 @@ namespace OOD2_project
         private Point point;
         private Component startComponent;
         private Component endComponent;
-        private Adjustable_Spliter adjSpliter;
+        private Adjustable adjSpliter;
         Connection con;
         private Point[] points;
         private bool pipeActivate;
@@ -86,7 +86,7 @@ namespace OOD2_project
 
                             if (!this.network.checkOverlap(point))
                             {
-                                this.adjSpliter = new Adjustable_Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point);
+                                this.adjSpliter = new Adjustable(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point);
                                 this.network.listComponents.Add(adjSpliter);
                                 isSelected = false;
                             }
@@ -102,7 +102,7 @@ namespace OOD2_project
                         case "spliter":
                             if (!this.network.checkOverlap(point))
                             {
-                                this.network.listComponents.Add(new Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
+                                this.network.listComponents.Add(new Splitter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
                             }
                             else
                                 MessageBox.Show("Components cannot overlap!");

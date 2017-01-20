@@ -9,31 +9,30 @@ using System.Windows.Forms;
 namespace OOD2_project
 {
     [Serializable]
-    public class Spliter : Component
+    public class Splitter : Component
     {
-        public double upOutFlow;
+        public double upperOutFlow;
         public double lowOutFlow;
         public double inFlow;
-        private Connection Input;
-        public Connection UpOutput;
+        public Connection Input;
+        public Connection upperOutput;
         public Connection LowOutput;
-        private bool counterIn = false;
-        private bool counterUpOut = false;
-        private bool counterLowOut = false;
+        private bool hasIn = false;
+        private bool hasUpOut = false;
+        private bool hasLowOut = false;
 
         public Rectangle upperRight;
         public Rectangle lowerRight;
         public Rectangle input;
 
-
-        public Spliter(Image image, int size, Point coordinates)
+        public Splitter(Image image, int size, Point coordinates)
             : base(image, size, coordinates)
         {
             this.lowOutFlow = 0;
-            this.upOutFlow = 0;
+            this.upperOutFlow = 0;
             this.inFlow = 0;
-            upperRight = new Rectangle((base.rect.Right - (base.rect.Width / 2)+10), base.rect.Bottom - base.rect.Height, 30, 27);
-            lowerRight = new Rectangle((base.rect.Right - (base.rect.Width / 2)+12), base.rect.Top + (base.rect.Height / 2), base.rect.Width / 2, (base.rect.Height / 2) + 1);
+            upperRight = new Rectangle((base.rect.Right - (base.rect.Width / 2) + 10), base.rect.Bottom - base.rect.Height, 30, 27);
+            lowerRight = new Rectangle((base.rect.Right - (base.rect.Width / 2) + 12), base.rect.Top + (base.rect.Height / 2), base.rect.Width / 2, (base.rect.Height / 2) + 1);
             input = new Rectangle(base.rect.Left, base.rect.Top, base.rect.Width / 2, base.rect.Height);
 
             //upperRight = new Rectangle(base.rect.Left + (base.rect.Width / 2), base.rect.Top + (base.rect.Width / 2), base.rect.Width / 2, base.rect.Height / 2);
@@ -41,53 +40,52 @@ namespace OOD2_project
             //input = new Rectangle(base.rect.Left, base.rect.Top, base.rect.Width / 2, base.rect.Height);
         }
 
-        public void Split()
+        public virtual void Split()
         {
-           // input = base.currentFlow;
-            this.upOutFlow = inFlow / 2;
-            this.lowOutFlow = inFlow / 2;
+            // input = base.currentFlow;
+            this.upperOutFlow = this.lowOutFlow = inFlow / 2;
         }
 
         public void Clear(Connection con)
         {
             if (con == this.Input)
             {
-                counterIn = false;
+                hasIn = false;
                 inFlow = 0;
-                upOutFlow = 0;
+                upperOutFlow = 0;
                 lowOutFlow = 0;
                 Input = null;
             }
             else if (con == this.LowOutput)
             {
-                counterLowOut = false;
+                hasLowOut = false;
                 LowOutput = null;
             }
-            else if (con == this.UpOutput)
+            else if (con == this.upperOutput)
             {
-                counterUpOut = false;
+                hasUpOut = false;
                 LowOutput = null;
             }
         }
         public void Clear()
         {
              
-                counterIn = false;
+                hasIn = false;
                 inFlow = 0;
-                upOutFlow = 0;
+                upperOutFlow = 0;
                 lowOutFlow = 0;
                 Input = null;
             
-                counterLowOut = false;
+                hasLowOut = false;
                 LowOutput = null;
              
-                counterUpOut = false;
+                hasUpOut = false;
               
         }
 
         public void setInput( ref Connection conn)
         {
-            if (counterIn)
+            if (hasIn)
             {
                 MessageBox.Show("You cannot have more than 1 Input");
                 conn = null;
@@ -97,19 +95,19 @@ namespace OOD2_project
                 this.Input = conn;
                 this.inFlow = conn.flow;
                 Split();
-                counterIn = true;
+                hasIn = true;
             }
-            
+
         }
 
-        public void SetUpOutput(ref Connection conn)
+        public void SetupperOutput(ref Connection conn)
         {
-            if (!counterUpOut)
+            if (!hasUpOut)
             {
-                this.UpOutput = conn;
+                this.upperOutput = conn;
                 Split();
-                conn.flow = upOutFlow;
-                counterUpOut = true;
+                conn.flow = upperOutFlow;
+                hasUpOut = true;
             }
             else
             {
@@ -118,19 +116,19 @@ namespace OOD2_project
             }
         }
 
-        public void SetLowOutput(ref Connection con)
+        public void SetLowOutput(ref Connection conn)
         {
-            if (!counterLowOut)
+            if (!hasLowOut)
             {
-                this.LowOutput = con;
+                this.LowOutput = conn;
                 Split();
-                con.flow = lowOutFlow;
-                counterLowOut = true;
+                conn.flow = lowOutFlow;
+                hasLowOut = true;
             }
             else
             {
                 MessageBox.Show("You can not have more than 2 low Outputs");
-                con = null;
+                conn = null;
             }
         }
 

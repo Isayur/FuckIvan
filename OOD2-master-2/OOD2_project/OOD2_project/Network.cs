@@ -134,18 +134,18 @@ namespace OOD2_project
                     }
                 }
             }
-            else if (con.startComponent is Spliter)
+            else if (con.startComponent is Splitter)
             {
 
                 for (int i = 0; i < listComponents.Count; i++)
                 {
                     if (listComponents.ElementAt(i) == con.startComponent)
                     {
-                        Spliter p = listComponents.ElementAt(i) as Spliter;
+                        Splitter p = listComponents.ElementAt(i) as Splitter;
                         Rectangle r1 = new Rectangle(con.curvePoints[0], new Size(2, 2));
                         if (r1.IntersectsWith(p.upperRight))
                         {
-                            p.SetUpOutput(ref con);
+                            p.SetupperOutput(ref con);
                             if (con != null)
                             {
                                 listComponents[i] = p;
@@ -167,18 +167,18 @@ namespace OOD2_project
                     }
                 }
             }
-            else if (con.startComponent is Adjustable_Spliter)
+            else if (con.startComponent is Adjustable)
             {
 
                 for (int i = 0; i < listComponents.Count; i++)
                 {
                     if (listComponents.ElementAt(i) == con.startComponent)
                     {
-                        Adjustable_Spliter p = listComponents.ElementAt(i) as Adjustable_Spliter;
+                        Adjustable p = listComponents.ElementAt(i) as Adjustable;
                         Rectangle r1 = new Rectangle(con.curvePoints[0], new Size(2, 2));
                         if (r1.IntersectsWith(p.upperRight))
                         {
-                            p.SetUpOutput(ref con);
+                            p.SetupperOutput(ref con);
                             if (con != null)
                             {
                                 listComponents[i] = p;
@@ -296,14 +296,14 @@ namespace OOD2_project
                         }
                     }
                 }
-                else if (con.endComponent is Spliter)
+                else if (con.endComponent is Splitter)
                 {
 
                     for (int i = 0; i < listComponents.Count; i++)
                     {
                         if (listComponents.ElementAt(i) == con.endComponent)
                         {
-                            Spliter p = listComponents.ElementAt(i) as Spliter;
+                            Splitter p = listComponents.ElementAt(i) as Splitter;
                             Rectangle r1 = new Rectangle(con.curvePoints[con.curvePoints.Count() - 1], new Size(2, 2));
                             if (r1.IntersectsWith(p.input))
                             {
@@ -312,12 +312,12 @@ namespace OOD2_project
                                 {
                                     listComponents[i] = p;
                                     con.endComponent = p;
-                                    if (p.UpOutput != null)
+                                    if (p.upperOutput != null)
                                     {
                                         foreach (Connection x in listConnections)
                                         {
-                                            if (x == p.UpOutput)
-                                                x.flow = p.upOutFlow;
+                                            if (x == p.upperOutput)
+                                                x.flow = p.upperOutFlow;
                                         }
                                     }
                                     if (p.LowOutput != null)
@@ -337,14 +337,14 @@ namespace OOD2_project
                     }
                 }
 
-                else if (con.endComponent is Adjustable_Spliter)
+                else if (con.endComponent is Adjustable)
                 {
 
                     for (int i = 0; i < listComponents.Count; i++)
                     {
                         if (listComponents.ElementAt(i) == con.endComponent)
                         {
-                            Adjustable_Spliter p = listComponents.ElementAt(i) as Adjustable_Spliter;
+                            Adjustable p = listComponents.ElementAt(i) as Adjustable;
                             Rectangle r1 = new Rectangle(con.curvePoints[con.curvePoints.Count() - 1], new Size(2, 2));
                             if (r1.IntersectsWith(p.input))
                             {
@@ -353,12 +353,12 @@ namespace OOD2_project
                                 {
                                     listComponents[i] = p;
                                     con.endComponent = p;
-                                    if (p.UpOutput != null)
+                                    if (p.upperOutput != null)
                                     {
                                         foreach (Connection x in listConnections)
                                         {
-                                            if (x == p.UpOutput)
-                                                x.flow = p.upOutFlow;
+                                            if (x == p.upperOutput)
+                                                x.flow = p.upperOutFlow;
                                         }
                                     }
                                     if (p.LowOutput != null)
@@ -405,15 +405,15 @@ namespace OOD2_project
                                 s.Clear();
                                 listComponents[counter] = s;
                             }
-                            else if (y is Spliter)
+                            else if (y is Splitter)
                             {
-                                Spliter s = y as Spliter;
+                                Splitter s = y as Splitter;
                                 s.Clear(x);
                                 listComponents[counter] = s;
                             }
-                            else if (y is Adjustable_Spliter)
+                            else if (y is Adjustable)
                             {
-                                Adjustable_Spliter s = y as Adjustable_Spliter;
+                                Adjustable s = y as Adjustable;
                                 s.Clear(x);
                                 listComponents[counter] = s;
                             }
@@ -442,15 +442,15 @@ namespace OOD2_project
                                 s.Clear();
                                 listComponents[counter] = s;
                             }
-                            else if (y is Spliter)
+                            else if (y is Splitter)
                             {
-                                Spliter s = y as Spliter;
+                                Splitter s = y as Splitter;
                                 s.Clear(x);
                                 listComponents[counter] = s;
                             }
-                            else if (y is Adjustable_Spliter)
+                            else if (y is Adjustable)
                             {
-                                Adjustable_Spliter s = y as Adjustable_Spliter;
+                                Adjustable s = y as Adjustable;
                                 s.Clear(x);
                                 listComponents[counter] = s;
                             }
@@ -498,15 +498,15 @@ namespace OOD2_project
                                 s.Clear();
                                 // listComponents[counter] = s;
                             }
-                            else if (y is Spliter)
+                            else if (y is Splitter)
                             {
-                                Spliter s = y as Spliter;
+                                Splitter s = y as Splitter;
                                 s.Clear(x);
                                 //  listComponents[counter] = s;
                             }
-                            else if (y is Adjustable_Spliter)
+                            else if (y is Adjustable)
                             {
-                                Adjustable_Spliter s = y as Adjustable_Spliter;
+                                Adjustable s = y as Adjustable;
                                 s.Clear(x);
                                 //  listComponents[counter] = s;
                             }
@@ -535,15 +535,15 @@ namespace OOD2_project
                                 s.Clear();
                                 //  listComponents[counter] = s;
                             }
-                            else if (y is Spliter)
+                            else if (y is Splitter)
                             {
-                                Spliter s = y as Spliter;
+                                Splitter s = y as Splitter;
                                 s.Clear(x);
                                 //  listComponents[counter] = s;
                             }
-                            else if (y is Adjustable_Spliter)
+                            else if (y is Adjustable)
                             {
-                                Adjustable_Spliter s = y as Adjustable_Spliter;
+                                Adjustable s = y as Adjustable;
                                 s.Clear(x);
                                 //listComponents[counter] = s;
                             }
@@ -616,21 +616,21 @@ namespace OOD2_project
                     m.Clear();
                 }
             }
-            else if (comp is Adjustable_Spliter)
+            else if (comp is Adjustable)
             {
                 foreach (Connection x in listConnections)
                 {
-                    Adjustable_Spliter s = comp as Adjustable_Spliter;
+                    Adjustable s = comp as Adjustable;
                     s.Clear(x);
                     s.Clear();
 
                 }
             }
-            else if (comp is Spliter)
+            else if (comp is Splitter)
             {
                 foreach (Connection x in listConnections)
                 {
-                    Spliter s = comp as Spliter;
+                    Splitter s = comp as Splitter;
                     s.Clear(x);
                     s.Clear();
 

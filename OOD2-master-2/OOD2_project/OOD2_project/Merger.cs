@@ -15,11 +15,11 @@ namespace OOD2_project
         public Connection lowInput { get; set; }
         public Connection Output { get; set; }
         private double lowInflow;
-        private double upInflow;
+        private double upperInFlow;
         public double outFlow;
-        public bool counterLowIn = false;
-        public bool counterUpIn = false;
-        public bool counterOut = false;
+        public bool hasLowIn = false;
+        public bool hasUpperIn = false;
+        public bool hasOut = false;
 
         public Rectangle upperLeft;
         public Rectangle lowerLeft;
@@ -31,7 +31,7 @@ namespace OOD2_project
             //this.upInput = UpInput;
             //this.lowInput = LowInput;
             lowInflow = 0;
-            upInflow = 0;
+            upperInFlow = 0;
             outFlow = 0;
             upperLeft = new Rectangle(base.rect.Left, base.rect.Top, 27, 27);
             lowerLeft = new Rectangle(base.rect.Left, base.rect.Top + (base.rect.Height / 2), 27, 27);
@@ -43,20 +43,20 @@ namespace OOD2_project
             //remove all connections related to a component
             if (con == this.Output)
             {
-                counterOut = false;
+                hasOut = false;
                 Output = null;
             }
             else if (con == this.lowInput)
             {
-                counterLowIn = false;
+                hasLowIn = false;
                 lowInflow = 0;
-                outFlow = upInflow;
+                outFlow = upperInFlow;
                 lowInput = null;
             }
             else if (con == this.upInput)
             {
-                counterUpIn = false;
-                upInflow = 0;
+                hasUpperIn = false;
+                upperInFlow = 0;
                 outFlow = lowInflow;
                 lowInput = null;
             }
@@ -66,16 +66,16 @@ namespace OOD2_project
         {
              
              
-                counterOut = false;
+                hasOut = false;
                 Output = null;
              
-                counterLowIn = false;
+                hasLowIn = false;
                 lowInflow = 0;
-                outFlow = upInflow;
+                outFlow = upperInFlow;
                 lowInput = null;
             
-                counterUpIn = false;
-                upInflow = 0;
+                hasUpperIn = false;
+                upperInFlow = 0;
                 outFlow = lowInflow;
               
         }
@@ -94,18 +94,18 @@ namespace OOD2_project
         public void Merge()
         {
             //merge the low and up outputs
-            outFlow = upInflow + lowInflow;
+            outFlow = upperInFlow + lowInflow;
         }
 
         public void setLowInput(ref Connection c)
         {
             //set the the low input
-            if (!counterLowIn)
+            if (!hasLowIn)
             {
                 lowInput = c;
                 lowInflow = c.flow;
                 Merge();
-                counterLowIn = true;
+                hasLowIn = true;
             }
             else
             {
@@ -117,12 +117,12 @@ namespace OOD2_project
 
         public void setUpInput(ref Connection c)
         {
-            if (!counterUpIn)
+            if (!hasUpperIn)
             {
                 upInput = c;
-                upInflow = c.flow;
+                upperInFlow = c.flow;
                 Merge();
-                counterUpIn = true;
+                hasUpperIn = true;
             }
             else
             {
@@ -134,12 +134,12 @@ namespace OOD2_project
 
         public void setOutput(ref Connection c)
         {
-            if (!counterOut)
+            if (!hasOut)
             {
                 Output = c;
                 Merge();
                 c.flow = outFlow;
-                counterOut = true;
+                hasOut = true;
             }
             else
             {

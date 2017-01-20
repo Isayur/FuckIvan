@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adjustable Spliter.cs" />
+    <Compile Include="Adjustable.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="Form1.cs">
@@ -64,7 +64,7 @@
     </Compile>
     <Compile Include="Pump.cs" />
     <Compile Include="Sink.cs" />
-    <Compile Include="Spliter.cs" />
+    <Compile Include="Splitter.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
