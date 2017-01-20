@@ -28,6 +28,7 @@ namespace OOD2_project
         Connection con;
         private Point[] points;
         private bool pipeActivate;
+        private bool pipeSelected = true;
 
         public Form1()
         {
@@ -51,77 +52,85 @@ namespace OOD2_project
             Graphics gr = e.Graphics;
             if (isSelected)
             {
-                
-                switch (selectedComponent)
+                try
                 {
-                    case "pump":   // CUrrent flow added...
-                        if (tbCurrentFlow.Text == "0" && tbMaxFlow.Text == "0")
-                        {
-                            MessageBox.Show("Please enter the current and max flow");
-                        }
-                        else if (Convert.ToInt32(tbCurrentFlow.Text) < 0 && Convert.ToInt32(tbMaxFlow.Text) < 0)
-                        {
-                            MessageBox.Show("Current and Max flow must be positive integers");
-                        }
-                        else
-                        {
+                    switch (selectedComponent)
+                    {
+
+                        case "pump":   // CUrrent flow added...
+                            if (tbCurrentFlow.Text == "0" && tbMaxFlow.Text == "0")
+                            {
+                                MessageBox.Show("Please enter the current and max flow");
+                            }
+                            else if (Convert.ToInt32(tbCurrentFlow.Text) < 0 && Convert.ToInt32(tbMaxFlow.Text) < 0)
+                            {
+                                MessageBox.Show("Current and Max flow must be positive integers");
+                            }
+                            else
+                            {
+                                if (!this.network.checkOverlap(point))
+                                {
+
+                                    this.network.listComponents.Add(new Pump(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, Convert.ToInt32(tbCurrentFlow.Text)));
+
+                                }
+                                else
+                                    MessageBox.Show("Components cannot overlap!");
+                            }
+                            break;
+
+                        case "adjSpliter":
+                            numericUpDown1.Visible = true;
+                            label9.Visible = true;
+                            btSet.Visible = true;
+
                             if (!this.network.checkOverlap(point))
                             {
-
-                                this.network.listComponents.Add(new Pump(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, Convert.ToInt32(tbCurrentFlow.Text)));
-
+                                this.adjSpliter = new Adjustable_Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point);
+                                this.network.listComponents.Add(adjSpliter);
+                                isSelected = false;
                             }
                             else
                                 MessageBox.Show("Components cannot overlap!");
-                        }
-                        break;
-                    case "adjSpliter":
-                        numericUpDown1.Visible = true;
-                        label9.Visible = true;
-                        btSet.Visible = true;
 
-                        if (!this.network.checkOverlap(point))
-                        {
-                            this.adjSpliter = new Adjustable_Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point);
-                            this.network.listComponents.Add(adjSpliter);
-                            isSelected = false;
-                        }
-                        else
-                            MessageBox.Show("Components cannot overlap!");
-
-                        if (numericUpDown1.Visible)
-                        {
-                            workPanel.Enabled = false;
-                            MessageBox.Show("Specify percentage for the Adjustable Splitter in the bottom left corner.");
-                        }
-                        break;
-                    case "spliter":
-                        if (!this.network.checkOverlap(point))
-                        {
-                            this.network.listComponents.Add(new Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
-                        }
-                        else
-                            MessageBox.Show("Components cannot overlap!");
-                        break;
-                    case "merger":
-                        if (!this.network.checkOverlap(point))
-                        {
-                            this.network.listComponents.Add(new Merger(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
-                        }
-                        else
-                            MessageBox.Show("Components cannot overlap!");
-                        break;
-                    case "sink":
-                        if (!this.network.checkOverlap(point))
-                        {
-                            this.network.listComponents.Add(new Sink(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
-                        }
-                        else
-                            MessageBox.Show("Components cannot overlap!");
-                        break;
-                    //case "pipe":
-                    //    //this.network.listConnections.Add(new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text),Convert.ToInt32(tbMaxFlow),points));
-                    //    break;
+                            if (numericUpDown1.Visible)
+                            {
+                                workPanel.Enabled = false;
+                                MessageBox.Show("Specify percentage for the Adjustable Splitter in the bottom left corner.");
+                            }
+                            break;
+                        case "spliter":
+                            if (!this.network.checkOverlap(point))
+                            {
+                                this.network.listComponents.Add(new Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
+                            }
+                            else
+                                MessageBox.Show("Components cannot overlap!");
+                            break;
+                        case "merger":
+                            if (!this.network.checkOverlap(point))
+                            {
+                                this.network.listComponents.Add(new Merger(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
+                            }
+                            else
+                                MessageBox.Show("Components cannot overlap!");
+                            break;
+                        case "sink":
+                            if (!this.network.checkOverlap(point))
+                            {
+                                this.network.listComponents.Add(new Sink(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
+                            }
+                            else
+                                MessageBox.Show("Components cannot overlap!");
+                            break;
+                        //case "pipe":
+                        //    //this.network.listConnections.Add(new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text),Convert.ToInt32(tbMaxFlow),points));
+                        //    break;
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Try entering only numbers", "Input was not in the correct format!");
                 }
                 foreach(Component com in this.network.listComponents)
                 {
@@ -171,62 +180,99 @@ namespace OOD2_project
             selectedComponent = "pump";
             pbPump.DoDragDrop(selectedImage, DragDropEffects.Copy);
             isSelected = true;
+            pbSink.BorderStyle = BorderStyle.None;
+            pbAdjustableSpliter.BorderStyle = BorderStyle.None;
+            pbSpliter.BorderStyle = BorderStyle.None;
+            pbMerger.BorderStyle = BorderStyle.None;
+            pbPipe.BorderStyle = BorderStyle.None;
         }
 
         private void pbSink_MouseDown(object sender, MouseEventArgs e)
         {
             Cursor.Current = Cursors.Cross;
-            pbPump.BorderStyle = BorderStyle.FixedSingle;
+            pbSink.BorderStyle = BorderStyle.FixedSingle;
             selectedImage = pbSink.Image;
             selectedComponent = "sink";
-            pbPump.DoDragDrop(selectedImage, DragDropEffects.Copy);
-            isSelected = true;            
+            pbSink.DoDragDrop(selectedImage, DragDropEffects.Copy);
+            isSelected = true;
+            pbPump.BorderStyle = BorderStyle.None;
+            pbAdjustableSpliter.BorderStyle = BorderStyle.None;
+            pbSpliter.BorderStyle = BorderStyle.None;
+            pbMerger.BorderStyle = BorderStyle.None;
+            pbPipe.BorderStyle = BorderStyle.None;
         }
 
         private void pbAdjustableSpliter_MouseDown(object sender, MouseEventArgs e)
         {
             Cursor.Current = Cursors.Cross;
-            pbPump.BorderStyle = BorderStyle.FixedSingle;
+            pbAdjustableSpliter.BorderStyle = BorderStyle.FixedSingle;
             selectedImage = pbAdjustableSpliter.Image;
             selectedComponent = "adjSpliter";
-            pbPump.DoDragDrop(selectedImage, DragDropEffects.Copy);
+            pbAdjustableSpliter.DoDragDrop(selectedImage, DragDropEffects.Copy);
             isSelected = true;
+            pbSink.BorderStyle = BorderStyle.None;
+            pbPump.BorderStyle = BorderStyle.None;
+            pbSpliter.BorderStyle = BorderStyle.None;
+            pbMerger.BorderStyle = BorderStyle.None;
+            pbPipe.BorderStyle = BorderStyle.None;
         }
 
         private void pbSpliter_MouseDown(object sender, MouseEventArgs e)
         {
             Cursor.Current = Cursors.Cross;
-            pbPump.BorderStyle = BorderStyle.FixedSingle;
+            pbSpliter.BorderStyle = BorderStyle.FixedSingle;
             selectedImage = pbSpliter.Image;
             selectedComponent = "spliter";
-            pbPump.DoDragDrop(selectedImage, DragDropEffects.Copy);
+            pbSpliter.DoDragDrop(selectedImage, DragDropEffects.Copy);
             isSelected = true;
+            pbSink.BorderStyle = BorderStyle.None;
+            pbAdjustableSpliter.BorderStyle = BorderStyle.None;
+            pbPump.BorderStyle = BorderStyle.None;
+            pbMerger.BorderStyle = BorderStyle.None;
+            pbPipe.BorderStyle = BorderStyle.None;
         }
 
         private void pbMerger_MouseDown(object sender, MouseEventArgs e)
         {
             Cursor.Current = Cursors.Cross;
-            pbPump.BorderStyle = BorderStyle.FixedSingle;
+            pbMerger.BorderStyle = BorderStyle.FixedSingle;
             selectedImage = pbMerger.Image;
             selectedComponent = "merger";
-            pbPump.DoDragDrop(selectedImage, DragDropEffects.Copy);
+            pbMerger.DoDragDrop(selectedImage, DragDropEffects.Copy);
             isSelected = true;
+            pbSink.BorderStyle = BorderStyle.None;
+            pbAdjustableSpliter.BorderStyle = BorderStyle.None;
+            pbSpliter.BorderStyle = BorderStyle.None;
+            pbPump.BorderStyle = BorderStyle.None;
+            pbPipe.BorderStyle = BorderStyle.None;
             
         }
-
+        
         private void pbPipe_MouseDown(object sender, MouseEventArgs e)
         {
+            if (pipeSelected)
+            {
+                MessageBox.Show("After pressing the pipe button first select a component then draw your path and select the other component.", "Message");
+                pipeSelected = false;
+            }
             Cursor.Current = Cursors.Cross;
-            pbPump.BorderStyle = BorderStyle.FixedSingle;
+            pbPipe.BorderStyle = BorderStyle.FixedSingle;
             selectedImage = pbPipe.Image;
             selectedComponent = "pipe";
-            pbPump.DoDragDrop(selectedImage, DragDropEffects.Copy);
+            pbPipe.DoDragDrop(selectedImage, DragDropEffects.Copy);
             pipeActivate = true;
+            pbSink.BorderStyle = BorderStyle.None;
+            pbAdjustableSpliter.BorderStyle = BorderStyle.None;
+            pbSpliter.BorderStyle = BorderStyle.None;
+            pbMerger.BorderStyle = BorderStyle.None;
+            pbPump.BorderStyle = BorderStyle.None;
         }
 
         private void workPanel_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Copy;
+            label10.Visible = false;
+
         }
 
         //Checks where the client clicks on the workPanel and add the point to the listComponent..
@@ -290,7 +336,9 @@ namespace OOD2_project
         private void workPanel_MouseClick(object sender, MouseEventArgs e)
         {
             //The point where the user click
-            Point p = new Point(e.X, e.Y); 
+            Point p = new Point(e.X, e.Y);
+
+             
 
             if (pipeActivate)
             {
@@ -306,9 +354,10 @@ namespace OOD2_project
                 {
                     
                          MenuItem[] menuItems = new MenuItem[3];
-                        menuItems[0] = new MenuItem("Remove Connection(s)");
+                        menuItems[0] = new MenuItem("Remove Connections");
                         menuItems[1] = new MenuItem("Remove Component");
                         menuItems[2] = new MenuItem("Clear Settings");
+
 
                         ContextMenu buttonMenu = new ContextMenu(menuItems);
                         buttonMenu.Show(workPanel, new System.Drawing.Point(p.X, p.Y));
@@ -329,13 +378,7 @@ namespace OOD2_project
                 this.network.RemoveConnection( this.network.getComponent(point));
                 this.network.ClearSettings(this.network.getComponent(point));
 
-                //foreach (var connection in this.network.getComponent(point).getConnections())
-                //{
-                //  //  this.network.RemoveConnection(connection, this.network.getComponent(point));
-                //    workPanel.Invalidate();
-                //     workPanel.Refresh();
-
-                //}
+               
             }
             //MenuItem Delete Component form the list with components
             if (sender == menuItems[1])
@@ -349,6 +392,8 @@ namespace OOD2_project
             {
                  this.network.ClearSettings(this.network.getComponent(point));
              }
+
+           
            // workPanel.Refresh();
             workPanel.Invalidate();
         }
@@ -527,12 +572,26 @@ namespace OOD2_project
                 this.Close();
             }
         }
+
+         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.network.SaveAs(this.network);
+
+        }
+        
         
         private void button1_Click(object sender, EventArgs e)
         {
            
             
         }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+       
 
     }
 }

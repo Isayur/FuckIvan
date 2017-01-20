@@ -68,7 +68,7 @@ namespace OOD2_project
                 }
                 else
                     gr.DrawLines(new Pen(Brushes.Green, 5), curvePoints);
-                    gr.DrawString(setFlow(), new Font(FontFamily.GenericSerif, 10, FontStyle.Regular), Brushes.Green, ((startComponent.getPosition().X + endComponent.getPosition().X) / 2), ((startComponent.getPosition().Y + endComponent.getPosition().Y) / 2));
+                gr.DrawString(setFlow(), new Font(FontFamily.GenericSerif, 10, FontStyle.Regular), Brushes.Blue, ((startComponent.getPosition().X + endComponent.getPosition().X) / 2), ((startComponent.getPosition().Y + endComponent.getPosition().Y) / 2));
             
             
         }

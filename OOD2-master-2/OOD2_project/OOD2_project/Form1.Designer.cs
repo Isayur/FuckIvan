@@ -57,6 +57,8 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label10 = new System.Windows.Forms.Label();
+            this.workPanel.SuspendLayout();
             this.toolBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPump)).BeginInit();
@@ -71,6 +73,7 @@
             // workPanel
             // 
             this.workPanel.BackColor = System.Drawing.Color.White;
+            this.workPanel.Controls.Add(this.label10);
             this.workPanel.Location = new System.Drawing.Point(164, 29);
             this.workPanel.Name = "workPanel";
             this.workPanel.Size = new System.Drawing.Size(815, 588);
@@ -301,6 +304,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(990, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -338,8 +342,9 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
@@ -350,9 +355,20 @@
             // 
             // helpToolStripMenuItem
             // 
+            this.helpToolStripMenuItem.Enabled = false;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(152, 283);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(578, 25);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Drag a component here to begin constructing your pipeline.";
             // 
             // Form1
             // 
@@ -366,6 +382,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.workPanel.ResumeLayout(false);
+            this.workPanel.PerformLayout();
             this.toolBox.ResumeLayout(false);
             this.toolBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
@@ -413,6 +431,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }
 

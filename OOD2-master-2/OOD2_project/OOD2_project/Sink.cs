@@ -36,7 +36,7 @@ namespace OOD2_project
             {
                 rect = new Rectangle(point.X - 1, point.Y - 1, base.size, base.size);
                 gr.DrawImage(base.image, rect);
-                gr.DrawString(Convert.ToString(inFlow), new Font(FontFamily.GenericSerif, 17, FontStyle.Bold), Brushes.Black, new Point(getPosition().X + 10, getPosition().Y - 12));
+                gr.DrawString(Convert.ToString(inFlow), new Font(FontFamily.GenericSerif, 17, FontStyle.Bold), Brushes.Black, new Point(getPosition().X + 10, getPosition().Y - 14));
             }
             catch (Exception ex)
             {
