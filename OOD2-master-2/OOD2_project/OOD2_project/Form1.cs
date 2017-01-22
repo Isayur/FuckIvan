@@ -134,10 +134,7 @@ namespace OOD2_project
                 }
                 foreach(Component com in this.network.listComponents)
                 {
-                    // foreach loop to draw
-                    if(com is Pump)
-                        com.DrawComponent(gr);
-                    else
+                   
                         com.DrawComponent(gr);
                 }
                 foreach (Connection c in this.network.listConnections)
@@ -160,10 +157,7 @@ namespace OOD2_project
           
             foreach (Component com in this.network.listComponents)
             {
-                // foreach loop to draw
-                if (com is Pump)
-                    com.DrawComponent(gr);
-                else
+               
                     com.DrawComponent(gr);
             }
             foreach (Connection c in this.network.listConnections)
@@ -383,9 +377,14 @@ namespace OOD2_project
             //MenuItem Delete Component form the list with components
             if (sender == menuItems[1])
             {
+                
+                
+               this.network.RemoveConnection(this.network.getComponent(point));
+
                this.network.RemoveComponent(this.network.getComponent(point));
                
-                
+               
+                              
             }
             //clears settings for the selected item so it can be reused
             if (sender == menuItems[2])

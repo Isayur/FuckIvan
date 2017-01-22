@@ -390,6 +390,7 @@ namespace OOD2_project
         public void RemoveComponent(Component comp)
         {
             List<Connection> toRemove = new List<Connection>();
+
             foreach (Connection x in listConnections)
             {
                 if (x.startComponent == comp)
@@ -428,6 +429,8 @@ namespace OOD2_project
                         counter++;
                     }
                     toRemove.Add(x);
+                   
+
                 }
                 if (x.endComponent == comp)
                 {
@@ -464,8 +467,11 @@ namespace OOD2_project
                         }
                     }
                     toRemove.Add(x);
+                    
                 }
             }
+
+            
 
             foreach (Connection c1 in toRemove)
             {
@@ -483,6 +489,8 @@ namespace OOD2_project
         {
             // this.listConnections.Remove(con);
             List<Connection> toRemove = new List<Connection>();
+            List<Component> compToClear = new List<Component>();
+
             foreach (Connection x in listConnections)
             {
                 if (x.startComponent == comp)
@@ -521,6 +529,8 @@ namespace OOD2_project
                         counter++;
                     }
                     toRemove.Add(x);
+                    compToClear.Add(x.startComponent);
+                    compToClear.Add(x.endComponent);
                 }
                 if (x.endComponent == comp)
                 {
@@ -557,9 +567,14 @@ namespace OOD2_project
                         }
                     }
                     toRemove.Add(x);
+                    compToClear.Add(x.startComponent);
+                    compToClear.Add(x.endComponent);
                 }
             }
-
+            foreach (var c in compToClear)
+            {
+                ClearSettings(c);
+            }
             foreach (Connection c1 in toRemove)
             {
                 listConnections.Remove(c1);
